@@ -87,7 +87,7 @@ app.listen(8080,()=>{
 });
 
 app.get("/",wrapAsync( async (req,res,next)=>{
-    res.send("this is home");
+    res.redirect("/listing");
 }));
 
 
