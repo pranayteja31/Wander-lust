@@ -1,0 +1,64 @@
+<% layout('./includes/boilerplate') -%>
+<body>
+    
+    <form method="post" action="/listing" novalidate class="needs-validation" enctype="multipart/form-data">
+        
+        <div class="row">
+            
+            <div class="col-8 offset-2">
+                <h2>Create new listing</h2>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="list[title]" placeholder="title" class="form-control" required>
+                    <div class="invalid-feedback">Enter a Title</div>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="list[description]" placeholder="description"  class="form-control" required></textarea>
+                    <div class="invalid-feedback">Please enter a description</div>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image</label>
+                    <input type="file" name="list[image][url]"  class="form-control" required>
+                    <div class="invalid-feedback">Add immage to your listing</div>
+                </div>
+                <div class="mb-3">
+                    <label for="filter" class="form-label">Filter</label>
+                    <select id="cars" name="list[filter]" required>
+                        <option >select</option>
+                        <option value="Mountain">Mountain</option>
+                        <option value="Room">Room</option>
+                        <option value="Castle">Castle</option>
+                        <option value="Iconic-City">Iconic-City</option>
+                        <option value="Arctic">Arctic</option>
+                        <option value="Beach">Beach</option>
+                        <option value="Pool">Pool</option>
+                    </select>
+                </div>
+                <div class="row inside-row">
+                    <div class="mb-3 col-md-4 inside-col1">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="text" name="list[price]" placeholder="e.g: &#8377;6,000"  class="form-control" required>
+                        <div class="invalid-feedback">Enter a valid price</div>
+                    </div>
+                    <div class="mb-3 col-md-7 inside-col2">
+                        <label for="country" class="form-label">Country</label>
+                        <input type="text" name="list[country]" placeholder="country"  class="form-control" required>
+                        <div class="invalid-feedback">Enter a valid country</div>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" name="list[location]" placeholder="location"  class="form-control" required>
+                    <div class="invalid-feedback">Enter a valid location</div>
+                </div>
+                <br>
+        
+                <button class="btn btn-primary form-btn" type="submit">Add</button>
+            </div>
+        </div>
+        
+    </form>
+    <script src="/js/maps.js"></script>
+</body>

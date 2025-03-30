@@ -1,0 +1,107 @@
+<% layout('./includes/boilerplate') -%>
+
+<body>
+    <div class="row">
+            <div class="card col-8 offset-2">
+                <img src="<%=lstdata.image.url%>" class="card-img-top" alt="Listing Image"><br>
+                <div class="row">
+                    <div class="card-body col-10">
+                        
+                        <p class="card-text"><b><%= lstdata.title %></b></p>
+                        <p class="card-text">Owned by <i><%= lstdata.owner.username %></i></p>
+                        <p class="card-text"><%= lstdata.description %></p>
+                        <p class="card-text">&#8377;<%= lstdata.price.toLocaleString("en-IN") %></p>
+                        <p class="card-text"><%= lstdata.location %>,<%= lstdata.country %></p>
+                        
+                    </div>
+                    
+                    <% if (currentUser && currentUser._id.equals(lstdata.owner._id)) { %>
+                        <form method="post" action="/listing/<%= lstdata._id %>?_method=DELETE" class="show-form">
+                            <br>
+                            <a href="/listing/<%= lstdata._id %>/edit" class="btn btn-primary edit">Edit</a>
+                            <button class="btn btn-dark delete">Delete</button>
+                        </form>
+                    <% } %>  
+                        
+                    
+                </div>
+                <br>
+                
+            </div>
+            
+            <div class="col-8 offset-2">
+                
+                <% if (currentUser) { %>
+                    <hr>
+                    <h4>Leave a Review</h4>
+                    <form method="post" action="/listing/<%= lstdata._id %>/review" class="needs-validation" novalidate>
+                        <div class="mb-1">
+                            <label for="customRange2" class="form-label">Rating</label>
+                            <fieldset class="starability-slot">
+                                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                                <label for="first-rate1" title="Terrible">1 star</label>
+                                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                                <label for="first-rate2" title="Not good">2 stars</label>
+                                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                                <label for="first-rate3" title="Average">3 stars</label>
+                                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                                <label for="first-rate4" title="Very good">4 stars</label>
+                                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                                <label for="first-rate5" title="Amazing">5 stars</label>
+                            </fieldset>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="comt" class="form-label">Comment</label><br>
+                            <input type="text" class="col-12 form-control" id="comt" name="review[comment]" required>
+                            <div class="invalid-feedback">
+                                Please enter a comment.
+                              </div>
+                        </div>
+                        <button class="btn btn-primary form-btn" type="submit">Comment</button>
+                    </form>
+                <% } %>
+                <br><hr>
+                <div class="all-comments">
+                    <h4>All Comments</h4>
+                    <div class="row row-cols-md-2 row-cols-sm-1 row-cols-1 g-10">
+                        
+                        <% for(let j of lstdata.review){%>
+                            
+                            <div class="card col ">
+                                <div class="card-body comment-card">
+                                    <h6 class="card-title">@<%= j.author.username %></h6>
+                                    <p class="starability-result card-subtitle" data-rating="<%= j.rating %>">
+                                      Rated: 3 stars
+                                    </p>
+                                    <p class="card-text"><%= j.comment %></p>
+                                    <% if (currentUser && j.author._id.equals(currentUser._id)) { %>
+                                        <form method="post" action="/listing/<%= lstdata._id %>/review/<%= j._id %>?_method=DELETE">
+                                            <button class="btn btn-dark btn-sm">Delete</button>
+                                        </form>
+                                    <% } %>
+                                    
+                                </div>
+                            </div>
+                            
+                            
+                        <% } %>
+                    </div>
+                    
+                </div>
+                <h4>Where you'll be</h4>
+                <div id="map"></div>
+            </div>
+    </div>
+    
+    
+</body>
+<script>
+    let c= <%- JSON.stringify(coord) %>;
+    var map = L.map('map').setView([c[0],c[1]], 13);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+</script>

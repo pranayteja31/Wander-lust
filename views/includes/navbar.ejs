@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-md bg-body-tertiary sticky-top border-bottom">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/listing"><i class="fa-solid fa-compass"></i></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link" href="/listing">Explore</a>
+          
+        </div>
+
+          <div class="ms-auto search-bar">
+            <nav class="navbar bg-body-tertiary">
+              <div class="container-fluid">
+                <form class="d-flex" role="search" action="/listing/search">
+                  <input class="form-control me-2 search-bar" type="search" placeholder="Search Destinations" aria-label="Search" name="q">
+                  <button class="btn srch" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+                </form>
+              </div>
+            </nav>
+          </div>
+        
+        
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link" href="/listing/new">New Listing</a>
+          <% if(!currentUser){ %>
+            <a class="nav-link active" aria-current="page" href="/user/signup">Sign up</a>
+            <a class="nav-link" href="/user/login">Log in</a>
+          <% } %>
+          <% if (currentUser) { %>
+            <a class="nav-link" href="/user/logout">Log out</a>
+          <% } %>
+          
+        </div>
+      </div>
+    </div>
+</nav>
