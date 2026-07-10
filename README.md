@@ -94,14 +94,4 @@ Contributions are welcome! If you'd like to contribute to Wander-lust:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📝 License
 
-This project is open source and available under the MIT License.
-
-## ✉️ Contact & Support
-
-For questions, suggestions, or feedback, feel free to open an issue on the repository or reach out directly.
-
----
-
-Happy travels! 🌍✈️
